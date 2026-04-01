@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom'; 
 import Header from './components/Header';
+import Chat from './components/Chat'; 
 import './App.css';
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
       <main className="container">
         <Outlet context={{ searchQuery }} />
       </main>
+      
+      <Chat />
     </div>
   );
 }

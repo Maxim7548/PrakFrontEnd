@@ -17,6 +17,7 @@ import HomePage from './components/HomePage'
 import RegisterPage from './components/RegisterPage'
 import ParticipantsPage from './components/ParticipantsPage' 
 import AnalyticsPage from './components/AnalyticsPage'
+import AuthPage from './components/AuthPage' // <-- ДОДАНО ІМПОРТ
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path="register/:eventId" element={<RegisterPage />} />
       <Route path="participants/:eventId" element={<ParticipantsPage />} />
       <Route path="analytics" element={<AnalyticsPage />} />
+      <Route path="auth" element={<AuthPage />} /> {/* <-- ДОДАНО МАРШРУТ */}
       <Route path="*" element={<div className="container">Сторінку не знайдено (404)</div>} />
     </Route>
   )

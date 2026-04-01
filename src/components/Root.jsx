@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom'; 
 import Header from './Header';
+import Chat from './Chat'; 
+import '../App.css';
 
-const Root = () => {
+function Root() {
   const [searchQuery, setSearchQuery] = useState('');
 
   return (
@@ -10,14 +12,16 @@ const Root = () => {
       <Header 
         searchQuery={searchQuery} 
         setSearchQuery={setSearchQuery} 
-        registeredCount={0} // Поки що 0, логіку лічильника оновимо пізніше
+        registeredCount={0} 
       />
       
       <main className="container">
         <Outlet context={{ searchQuery }} />
       </main>
+      
+      <Chat />
     </div>
   );
-};
+}
 
 export default Root;

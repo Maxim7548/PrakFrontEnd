@@ -42,6 +42,10 @@ const Header = ({ searchQuery, setSearchQuery }) => {
         <Link to="/analytics" style={{ color: '#10ac84', fontWeight: 'bold', textDecoration: 'none', background: 'white', padding: '5px 15px', borderRadius: '20px' }}>
           Аналітика
         </Link>
+
+        <Link to="/auth" style={{ color: '#007bff', fontWeight: 'bold', textDecoration: 'none', background: 'white', padding: '5px 15px', borderRadius: '20px' }}>
+          Вхід
+        </Link>
       </div>
     </header>
   );

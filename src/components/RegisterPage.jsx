@@ -63,18 +63,27 @@ const RegisterPage = () => {
     }
 
     try {
-      await fetch('https://jsonplaceholder.typicode.com/posts', {
+      const res = await fetch('https://event-gallery-backend.onrender.com/participants', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...result.data, eventId }) 
+        body: JSON.stringify({ 
+            name: result.data.fullName,
+            email: result.data.email,
+            eventId: String(eventId) 
+        }) 
       });
+
+      if (!res.ok) {
+          throw new Error("Помилка збереження в базу");
+      }
 
       dispatch(registerForEvent(Number(eventId))); 
 
       alert("Реєстрація успішна!");
       navigate('/');
-    } catch {
-      alert("Сталася помилка при відправці");
+    } catch (error) {
+      console.error(error);
+      alert("Сталася помилка при відправці на сервер");
     } finally {
       setIsSubmitting(false);
     }
