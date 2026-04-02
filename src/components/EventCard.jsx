@@ -41,10 +41,7 @@ const EventCard = ({ event }) => {
           <Link to={`/participants/${event._id}`} className="view-btn">Учасники</Link>
           
           {isAdmin && (
-            <button 
-              onClick={handleDelete} 
-              style={{ backgroundColor: '#dc3545', color: 'white', border: 'none', padding: '8px 12px', borderRadius: '4px', cursor: 'pointer', marginTop: '10px' }}
-            >
+            <button onClick={handleDelete} className="delete-btn">
               Видалити
             </button>
           )}
