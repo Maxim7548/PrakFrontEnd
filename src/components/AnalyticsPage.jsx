@@ -6,11 +6,9 @@ const AnalyticsPage = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    // Йдемо на наш новий бекенд-маршрут за даними
-    fetch('https://event-gallery-backend.onrender.com')
+    fetch('https://event-gallery-backend.onrender.com/analytics')
       .then(res => res.json())
       .then(fetchedData => {
-        // Якщо база ще порожня, показуємо заглушку
         if (fetchedData.length === 0) {
           setData([{ name: 'Немає даних', registrations: 0 }]);
         } else {
