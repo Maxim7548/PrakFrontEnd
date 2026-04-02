@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 
 const socket = io('https://event-gallery-backend.onrender.com', {
-    withCredentials: true
+    withCredentials: true,
+    transports: ['websocket', 'polling']
 });
 
 const Chat = () => {
@@ -29,7 +30,7 @@ const Chat = () => {
         if (input.trim()) {
             const newMessage = {
                 text: input,
-                time: new Date().toLocaleTimeString().slice(0, 5),
+                time: new Date().toLocaleTimeString('uk-UA').slice(0, 5),
                 id: Math.random().toString(36).substr(2, 9)
             };
             socket.emit('sendMessage', newMessage);
