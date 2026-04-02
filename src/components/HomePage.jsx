@@ -13,6 +13,9 @@ const HomePage = () => {
   const registeredIds = useSelector((state) => state.events.registeredIds);
   const status = useSelector((state) => state.events.status);
   const hasMore = useSelector((state) => state.events.hasMore);
+  
+  const user = useSelector((state) => state.auth?.user || state.user?.user); 
+  const isAdmin = user && (user.role === 'admin' || user.role === 'organizer');
 
   useEffect(() => {
     if (events.length === 0) {
@@ -22,7 +25,6 @@ const HomePage = () => {
 
   const loadMoreEvents = useCallback(() => {
     if (status === 'loading' || !hasMore || events.length === 0) return;
-    
     const lastEventId = events[events.length - 1]._id; 
     dispatch(fetchEvents(lastEventId));
   }, [events, status, hasMore, dispatch]);
@@ -33,7 +35,6 @@ const HomePage = () => {
         >= document.documentElement.offsetHeight - 10;
       if (isBottom) loadMoreEvents();
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loadMoreEvents]);
@@ -44,10 +45,13 @@ const HomePage = () => {
 
   return (
     <>
+      {isAdmin && <CreateEventForm />}
+
       <EventList 
         events={filteredEvents} 
         registeredIds={registeredIds}
         toggleRegister={() => {}} 
+        isAdmin={isAdmin} 
       />
       {status === 'loading' && <p style={{textAlign: 'center', margin: '20px'}}>Завантажуємо події...</p>}
     </>

@@ -9,7 +9,6 @@ const socket = io('https://event-gallery-backend.onrender.com', {
 const Chat = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
-    // Додаємо стан для відкриття/закриття чату
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
@@ -82,7 +81,6 @@ const Chat = () => {
 };
 
 const styles = {
-    // Стиль для круглої кнопки в кутку
     openChatBtn: {
         position: 'fixed', bottom: '20px', right: '20px',
         width: '60px', height: '60px', borderRadius: '50%',
@@ -90,7 +88,6 @@ const styles = {
         border: 'none', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
         zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center'
     },
-    // Стиль для відкритого вікна
     chatContainer: { 
         position: 'fixed', bottom: '20px', right: '20px', width: '320px', 
         backgroundColor: 'white', border: '1px solid #ddd', borderRadius: '12px', 
