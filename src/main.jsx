@@ -17,7 +17,7 @@ import HomePage from './components/HomePage'
 import RegisterPage from './components/RegisterPage'
 import ParticipantsPage from './components/ParticipantsPage' 
 import AnalyticsPage from './components/AnalyticsPage'
-import AuthPage from './components/AuthPage' // <-- ДОДАНО ІМПОРТ
+import AuthPage from './components/AuthPage' 
 
 const router = createBrowserRouter(
   createRoutesFromElements(

@@ -2,18 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 const ParticipantsPage = () => {
-  const { eventId } = useParams(); // Отримуємо ID події з URL
+  const { eventId } = useParams(); 
   const [participants, setParticipants] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    // Йдемо на наш бекенд за реальними учасниками цієї конкретної події
     fetch(`https://event-gallery-backend.onrender.com/participants/${eventId}`, {
         credentials: 'include' 
     })
       .then(res => res.json())
       .then(data => {
-        // Якщо бекенд повернув масив, зберігаємо його
         if (Array.isArray(data)) {
             setParticipants(data);
         }
@@ -21,7 +19,6 @@ const ParticipantsPage = () => {
       .catch(err => console.error("Помилка завантаження учасників:", err));
   }, [eventId]);
 
-  // Логіка для рядка пошуку
   const filteredParticipants = participants.filter(p =>
     p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     p.email.toLowerCase().includes(searchQuery.toLowerCase())

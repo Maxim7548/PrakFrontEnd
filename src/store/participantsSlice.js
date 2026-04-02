@@ -4,7 +4,6 @@ export const participantsAdapter = createEntityAdapter({
   selectId: (participant) => participant._id 
 });
 
-// Реальний запит на твій бекенд!
 export const fetchParticipants = createAsyncThunk(
   'participants/fetchParticipants',
   async (eventId, { rejectWithValue }) => {

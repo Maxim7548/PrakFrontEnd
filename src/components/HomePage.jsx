@@ -26,7 +26,6 @@ const HomePage = () => {
     dispatch(fetchEvents(lastEventId));
   }, [events, status, hasMore, dispatch]);
 
-  // Слухач скролу
   useEffect(() => {
     const handleScroll = () => {
       const isBottom = window.innerHeight + document.documentElement.scrollTop 

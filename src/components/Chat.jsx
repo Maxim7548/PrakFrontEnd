@@ -9,6 +9,8 @@ const socket = io('https://event-gallery-backend.onrender.com', {
 const Chat = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
+    // Додаємо стан для відкриття/закриття чату
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         socket.on('chatHistory', (historyData) => {
@@ -38,9 +40,22 @@ const Chat = () => {
         }
     };
 
+    if (!isOpen) {
+        return (
+            <button style={styles.openChatBtn} onClick={() => setIsOpen(true)}>
+                💬
+            </button>
+        );
+    }
+
     return (
         <div style={styles.chatContainer}>
-            <h3 style={styles.header}>💬 Чат підтримки</h3>
+            <div style={styles.header}>
+                <span style={{fontWeight: 'bold'}}>💬 Чат підтримки</span>
+                {/* Кнопка закриття чату (хрестик) */}
+                <button style={styles.closeBtn} onClick={() => setIsOpen(false)}>✖</button>
+            </div>
+            
             <div style={styles.messagesArea}>
                 {messages.length === 0 ? (
                     <p style={{textAlign: 'center', color: '#888', fontSize: '14px'}}>Немає повідомлень. Напишіть першим!</p>
@@ -60,21 +75,57 @@ const Chat = () => {
                     placeholder="Ваше повідомлення..."
                     style={styles.input}
                 />
-                <button type="submit" style={styles.button}>➤</button>
+                <button type="submit" style={styles.sendBtn}>➤</button>
             </form>
         </div>
     );
 };
 
 const styles = {
-    chatContainer: { position: 'fixed', bottom: '20px', right: '20px', width: '300px', backgroundColor: 'white', border: '1px solid #ddd', borderRadius: '10px', boxShadow: '0 5px 15px rgba(0,0,0,0.2)', zIndex: 1000, fontFamily: 'sans-serif' },
-    header: { backgroundColor: '#007bff', color: 'white', margin: 0, padding: '12px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', fontSize: '16px', textAlign: 'center' },
-    messagesArea: { height: '250px', overflowY: 'auto', padding: '10px', display: 'flex', flexDirection: 'column', gap: '8px', backgroundColor: '#f9f9f9' },
-    message: { backgroundColor: '#e9ecef', padding: '8px 12px', borderRadius: '15px', fontSize: '14px', width: 'fit-content', maxWidth: '80%' },
-    time: { fontSize: '11px', color: '#666', marginRight: '6px' },
-    inputArea: { display: 'flex', padding: '10px', borderTop: '1px solid #ddd', backgroundColor: 'white', borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px' },
-    input: { flex: 1, padding: '8px 12px', borderRadius: '20px', border: '1px solid #ccc', marginRight: '8px', outline: 'none' },
-    button: { padding: '8px 15px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold' }
+    // Стиль для круглої кнопки в кутку
+    openChatBtn: {
+        position: 'fixed', bottom: '20px', right: '20px',
+        width: '60px', height: '60px', borderRadius: '50%',
+        backgroundColor: '#007bff', color: 'white', fontSize: '24px',
+        border: 'none', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+        zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center'
+    },
+    // Стиль для відкритого вікна
+    chatContainer: { 
+        position: 'fixed', bottom: '20px', right: '20px', width: '320px', 
+        backgroundColor: 'white', border: '1px solid #ddd', borderRadius: '12px', 
+        boxShadow: '0 8px 20px rgba(0,0,0,0.2)', zIndex: 1000, fontFamily: 'sans-serif',
+        display: 'flex', flexDirection: 'column', overflow: 'hidden'
+    },
+    header: { 
+        backgroundColor: '#007bff', color: 'white', padding: '12px 15px', 
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '16px' 
+    },
+    closeBtn: {
+        backgroundColor: 'transparent', color: 'white', border: 'none',
+        fontSize: '16px', cursor: 'pointer', fontWeight: 'bold'
+    },
+    messagesArea: { 
+        height: '300px', overflowY: 'auto', padding: '15px', display: 'flex', 
+        flexDirection: 'column', gap: '10px', backgroundColor: '#f8f9fa' 
+    },
+    message: { 
+        backgroundColor: '#e9ecef', padding: '10px 14px', borderRadius: '15px', 
+        fontSize: '14px', width: 'fit-content', maxWidth: '85%', color: '#333'
+    },
+    time: { fontSize: '11px', color: '#888', marginRight: '8px' },
+    inputArea: { 
+        display: 'flex', padding: '12px', borderTop: '1px solid #eee', backgroundColor: 'white' 
+    },
+    input: { 
+        flex: 1, padding: '10px 14px', borderRadius: '20px', border: '1px solid #ccc', 
+        marginRight: '10px', outline: 'none', fontSize: '14px' 
+    },
+    sendBtn: { 
+        width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#007bff', 
+        color: 'white', border: 'none', cursor: 'pointer', display: 'flex', 
+        justifyContent: 'center', alignItems: 'center', fontSize: '16px' 
+    }
 };
 
 export default Chat;
