@@ -11,11 +11,11 @@ const EventCard = ({ event }) => {
         <p>{event.description}</p>
 
         <div className="card-actions">
-          <Link to={`/register/${event.id}`} className="register-btn">
+          <Link to={`/register/${event._id}`} className="register-btn">
             Зареєструватися
           </Link>
           
-          <Link to={`/participants/${event.id}`} className="view-btn">
+          <Link to={`/participants/${event._id}`} className="view-btn">
             Учасники
           </Link>
         </div>

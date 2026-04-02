@@ -8,9 +8,9 @@ const EventList = ({ events, registeredIds, toggleRegister }) => {
     <div className="event-grid">
       {events.map((event) => (
         <EventCard
-          key={event.id}
+          key={event._id} 
           event={event}
-          isRegistered={registeredIds.includes(event.id)}
+          isRegistered={registeredIds.includes(event._id)} 
           onToggleRegister={toggleRegister}
         />
       ))}
