@@ -6,8 +6,16 @@ const AnalyticsPage = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('https://event-gallery-backend.onrender.com/analytics')
-      .then(res => res.json())
+    fetch('https://event-gallery-backend.onrender.com/analytics', {
+      method: 'GET',
+      credentials: 'include' 
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Помилка авторизації або сервера');
+        }
+        return res.json();
+      })
       .then(fetchedData => {
         if (fetchedData.length === 0) {
           setData([{ name: 'Немає даних', registrations: 0 }]);
