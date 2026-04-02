@@ -14,8 +14,9 @@ const HomePage = () => {
   const status = useSelector((state) => state.events.status);
   const hasMore = useSelector((state) => state.events.hasMore);
   
-  const user = useSelector((state) => state.auth?.user || state.user?.user); 
-  const isAdmin = user && (user.role === 'admin' || user.role === 'organizer');
+  // ЧИТАЄМО З ПАМ'ЯТІ БРАУЗЕРА
+  const userRole = localStorage.getItem('userRole');
+  const isAdmin = userRole === 'admin' || userRole === 'organizer';
 
   useEffect(() => {
     if (events.length === 0) {
@@ -51,7 +52,6 @@ const HomePage = () => {
         events={filteredEvents} 
         registeredIds={registeredIds}
         toggleRegister={() => {}} 
-        isAdmin={isAdmin} 
       />
       {status === 'loading' && <p style={{textAlign: 'center', margin: '20px'}}>Завантажуємо події...</p>}
     </>

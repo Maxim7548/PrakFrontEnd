@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const EventCard = ({ event, isAdmin }) => {
+const EventCard = ({ event }) => {
+  
+  const userRole = localStorage.getItem('userRole');
+  const isAdmin = userRole === 'admin' || userRole === 'organizer';
+
   const handleDelete = async () => {
     const isConfirmed = window.confirm(`Видалити подію "${event.title}"?`);
     

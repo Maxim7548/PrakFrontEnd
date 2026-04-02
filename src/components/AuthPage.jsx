@@ -23,6 +23,13 @@ const AuthPage = () => {
             
             if (res.ok) {
                 alert(data.message);
+                
+                if (data.user && data.user.role) {
+                    localStorage.setItem('userRole', data.user.role);
+                } else if (!isLogin) {
+                    localStorage.setItem('userRole', 'organizer'); 
+                }
+
                 if (isLogin) navigate('/'); 
                 else setIsLogin(true); 
             } else {
