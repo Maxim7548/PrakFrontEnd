@@ -7,8 +7,8 @@ const Header = ({ searchQuery, setSearchQuery }) => {
   const registeredIds = useSelector((state) => state.events.registeredIds);
   const theme = useSelector((state) => state.theme.mode);
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem('user')) || {};
-  const isAdmin = user.role === 'admin' || user.role === 'organizer';
+  const userRole = localStorage.getItem('userRole');
+  const isAdmin = userRole === 'admin' || userRole === 'organizer';
 
   const headerStyle = {
     backgroundColor: theme === 'light' ? '#2d3436' : '#000000',
