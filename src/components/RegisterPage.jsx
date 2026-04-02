@@ -35,7 +35,7 @@ const RegisterPage = () => {
   const dispatch = useDispatch(); 
   
   const event = useSelector((state) => 
-    state.events.items.find((e) => e.id === Number(eventId))
+    state.events.items.find((e) => String(e._id || e.id) === String(eventId))
   );
 
   const [errors, setErrors] = useState({}); 
