@@ -3,6 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'; 
 import { fetchEvents } from '../store/eventsSlice';
 import EventList from './EventList';
+import CreateEventForm from './CreateEventForm';
 
 const HomePage = () => {
   const { searchQuery } = useOutletContext();
